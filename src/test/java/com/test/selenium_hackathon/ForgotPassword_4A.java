@@ -7,12 +7,10 @@ public class ForgotPassword_4A extends SalesforceUltility{
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 
-		String URL = "https://login.salesforce.com/";
-		String usernameVal = "karthika@betsy.com";
+		String[] credentials = readConfigFile().split(" ");
 		
-
 		LaunchChromeBrowser();
-		gotoURL(URL);
+		gotoURL(credentials[2]);
 		
 		WebElement forgotPassword = setXpath("//a[@id='forgot_password_link']");
 		
@@ -20,7 +18,7 @@ public class ForgotPassword_4A extends SalesforceUltility{
 		WebElement username = setXpath("//input[@id='un']");
 		explicitWait(5000, username);
 		
-		username.sendKeys(usernameVal);
+		username.sendKeys(credentials[0]);
 		
 		WebElement continueButton = setXpath("//input[@id='continue']");
 		continueButton.click();

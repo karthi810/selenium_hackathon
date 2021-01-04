@@ -15,7 +15,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Sleeper;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class TC25 extends SalesforceUltility {
+public class TC36 extends SalesforceUltility {
 
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
@@ -36,11 +36,10 @@ public class TC25 extends SalesforceUltility {
 		explicitWait(5000, password);
 
 		login(loginButton);
-		WebElement contactsTab = setXpath("//a[normalize-space()='Contacts']");
-		explicitWait(5, contactsTab);
-
-		contactsTab.click();
-		//Thread.sleep(3000);
+		WebElement homeTab = setXpath("//a[normalize-space()='Home']");
+		homeTab.click();
+		
+		Thread.sleep(3000);
 		try {
 			explicitWait(2000, driver.findElement(By.xpath("//a[@id='tryLexDialogX']")));
 			WebElement closeDialog = setXpath("//a[@id='tryLexDialogX']");			
@@ -49,49 +48,44 @@ public class TC25 extends SalesforceUltility {
 		} catch (Exception e) {
 			System.out.println("Close Dialog not found");
 		}
-
-		explicitWait(5, driver.findElement(By.xpath("//input[@title='New']")));
-		WebElement newButton = setXpath("//input[@title='New']");
-		newButton.click();
 		
-		WebElement lastName = setXpath("//input[@id='name_lastcon2']");
-		explicitWait(3000, lastName);
-
-		lastName.sendKeys("ABCD");
+		WebElement currDateTimeLink = setXpath("//a[@href='/00U/c?md3=4&md0=2021']");
+		currDateTimeLink.click();
 		
-		WebElement searchAccountName = setXpath("//img[@title='Account Name Lookup (New Window)']");
-		searchAccountName.click();
+		explicitWait(5000, driver.findElement(By.xpath("//img[@title='Single User View - Selected']")));
+		
+		WebElement eightPmTab = setXpath("//div[@id='p:f:j_id25:j_id61:28:j_id64']//a[normalize-space()='8:00 PM']");
+		explicitWait(5000, eightPmTab);
+		
+		eightPmTab.click();
+		
+		WebElement subjectComboButton = setXpath("//img[@title='Subject Combo (New Window)']");
+		subjectComboButton.click();
 		
 		ArrayList<String> totalWindows = new ArrayList<String>(driver.getWindowHandles());
 		System.out.println("Total no of Tabs open : " + totalWindows.size());
 		driver.switchTo().window(totalWindows.get(totalWindows.size() - 1));
 		
-		int frameCount = driver.findElements(By.tagName("frame")).size();
-		System.out.println("Frame count = "+frameCount);
+		WebElement othersLink = setXpath("//div[@class='choicesBox tertiaryPalette brandSecondaryBrd']//ul//li[5]//a");
+		othersLink.click();
 		
-		driver.switchTo().frame(driver.findElement(By.id("searchFrame")));
-		
-		WebElement serachAccount = setXpath("//input[@id='lksrch']");
-		serachAccount.sendKeys("banking");
-		
-		WebElement goButton = setXpath("//input[@value=' Go! ']");
-		goButton.click();
-
 		Thread.sleep(2000);
-		driver.switchTo().defaultContent();
-		driver.switchTo().frame(driver.findElement(By.xpath("//frame[@id='resultsFrame']")));
-		Thread.sleep(2000);
-		WebElement selectAccountName = setXpath("//a[@class=' dataCell ']");
-		//System.out.println("Before click" +driver.getWindowHandle().toString());
-		selectAccountName.click();
 		
-		//System.out.println(driver.getWindowHandle().toString());
 		driver.switchTo().window(totalWindows.get(0));
-		//driver.switchTo().getWindowHandle();
 		
-		WebElement saveButton = setXpath("//td[@id='bottomButtonRow']//input[@title='Save']");
+		
+		WebElement endDate = setXpath("//input[@id='EndDateTime_time']");
+		endDate.click();
+		
+		WebElement selectEndTime = setXpath("//div[@id='timePickerItem_42']");
+		selectEndTime.click();
+		
+		WebElement saveButton = setXpath("//td[@id='topButtonRow']//input[@title='Save']");
 		saveButton.click();
-
+		
+		explicitWait(5000, driver.findElement(By.xpath("//span[contains(text(),'Other')]")));
+		
+		//Thread.sleep(2000);
 		
 		
 		quitBrowser();

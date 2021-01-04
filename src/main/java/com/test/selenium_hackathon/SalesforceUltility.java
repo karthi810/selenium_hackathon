@@ -1,6 +1,8 @@
 package com.test.selenium_hackathon;
 
+import java.io.FileInputStream;
 import java.util.List;
+import java.util.Properties;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,8 +11,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import io.github.bonigarcia.wdm.WebDriverManager;
+
 
 public class SalesforceUltility {
 
@@ -64,7 +66,20 @@ public class SalesforceUltility {
 		WebElement elemName = driver.findElement(By.id(id));
 		return elemName;
 	}
-
+	
+	public static String readConfigFile() throws Exception{
+		String configFilePath = System.getProperty("user.dir")+"/config.properties";
+		FileInputStream configFile = new FileInputStream(configFilePath);
+		
+		Properties pObj = new Properties();
+		pObj.load(configFile);
+		System.getProperties().putAll(pObj);
+		String credentialsAndURL = "";
+		
+		credentialsAndURL = System.getProperty("username")+" "+System.getProperty("password")+" "+System.getProperty("url");
+		return credentialsAndURL;
+	}
+	
 	public static void quitBrowser() {
 		driver.quit();
 	}

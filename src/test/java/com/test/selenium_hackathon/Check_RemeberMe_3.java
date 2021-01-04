@@ -8,22 +8,20 @@ public class Check_RemeberMe_3 extends SalesforceUltility{
 	public static void main(String[] args) throws Exception{
 		// TODO Auto-generated method stub
 		
-		String URL = "https://login.salesforce.com/";
-		String usernameVal = "karthika@betsy.com";
-		String passwordVal = "*****";
+		String[] credentials = readConfigFile().split(" ");
 
 		LaunchChromeBrowser();
-		gotoURL(URL);
+		gotoURL(credentials[2]);
 
 		WebElement username = setXpath("//input[@id='username']");
 		WebElement password = setXpath("//input[@id='password']");
 		WebElement loginButton = setXpath("//input[@id='Login']");
 		WebElement rememberMe = setXpath("//input[@id='rememberUn']");
-
-		loginDetails(username, usernameVal);
+		
+		loginDetails(username, credentials[0]);
 		explicitWait(5000, username);
 
-		loginDetails(password, passwordVal);
+		loginDetails(password, credentials[1]);
 		explicitWait(5000, password);
 		
 		rememberMe.click();

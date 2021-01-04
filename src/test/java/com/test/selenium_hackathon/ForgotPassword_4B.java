@@ -8,13 +8,13 @@ public class ForgotPassword_4B extends SalesforceUltility{
 		public static void main(String[] args) throws Exception {
 			// TODO Auto-generated method stub
 
-			String URL = "https://login.salesforce.com/";
+			String[] credentials = readConfigFile().split(" ");
 			String usernameVal = "123";
 			String passwordVal = "22131";
 			
 
 			LaunchChromeBrowser();
-			gotoURL(URL);
+			gotoURL(credentials[2]);
 			
 			WebElement username = setXpath("//input[@id='username']");
 			WebElement password = setXpath("//input[@id='password']");

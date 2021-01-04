@@ -15,7 +15,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Sleeper;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class TC27 extends SalesforceUltility {
+public class TC33 extends SalesforceUltility {
 
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
@@ -36,10 +36,10 @@ public class TC27 extends SalesforceUltility {
 		explicitWait(5000, password);
 
 		login(loginButton);
-		WebElement contactsTab = setXpath("//a[normalize-space()='Contacts']");
-		explicitWait(5, contactsTab);
+		WebElement homeTab = setXpath("//a[normalize-space()='Home']");
+		explicitWait(5, homeTab);
 
-		contactsTab.click();
+		homeTab.click();
 		//Thread.sleep(3000);
 		try {
 			explicitWait(2000, driver.findElement(By.xpath("//a[@id='tryLexDialogX']")));
@@ -50,15 +50,11 @@ public class TC27 extends SalesforceUltility {
 			System.out.println("Close Dialog not found");
 		}
 
-		explicitWait(5, driver.findElement(By.xpath("//select[@id='hotlist_mode']")));
+		//explicitWait(5, driver.findElement(By.xpath("//select[@id='fcf']")));
 		
-		WebElement displaySelectionDropDown = setXpath("//select[@id='hotlist_mode']");
-		Select displaySelection = new Select(displaySelectionDropDown);
-		displaySelection.selectByVisibleText("Recently Created");
+		WebElement profileName = setXpath("//h1[@class='currentStatusUserName']");
+		explicitWait(5000, profileName);
 		
-		
-		//Thread.sleep(2000);
-
 		
 		
 		quitBrowser();

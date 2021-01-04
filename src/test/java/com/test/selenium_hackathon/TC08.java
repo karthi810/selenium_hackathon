@@ -13,22 +13,19 @@ public class TC08 extends SalesforceUltility{
 	public static void main(String[] args) throws Exception{
 		// TODO Auto-generated method stub
 
-		String URL = "https://login.salesforce.com/";
-		String usernameVal = "karthika@betsy.com";
-		String passwordVal = "*****";
+		String[] credentials = readConfigFile().split(" ");
 
 		LaunchChromeBrowser();
-		gotoURL(URL);
+		gotoURL(credentials[2]);
 
-		WebElement username = driver.findElement(By.xpath("//input[@id='username']"));
-		WebElement password = driver.findElement(By.xpath("//input[@id='password']"));
-		WebElement loginButton = driver.findElement(By.xpath("//input[@id='Login']"));
+		WebElement username = setXpath("//input[@id='username']");
+		WebElement password = setXpath("//input[@id='password']");
+		WebElement loginButton = setXpath("//input[@id='Login']");
 
-		
-		loginDetails(username, usernameVal);
+		loginDetails(username, credentials[0]);
 		explicitWait(5000, username);
 
-		loginDetails(password, passwordVal);
+		loginDetails(password, credentials[1]);
 		explicitWait(5000, password);
 		
 		login(loginButton);
